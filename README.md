@@ -1,0 +1,1 @@
+# JFrog GitLab Templates
