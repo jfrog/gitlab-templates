@@ -1,0 +1,17 @@
+# Use this template to build a Gradle project, resolve artifacts, publish JARs, and publish the build information to JFrog Artifactory.
+# Requirements:
+# Configure the following variables with the corresponding Gradle repositories in JFrog Artifactory:
+#   'ARTIFACTORY_REMOTE_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
+default:
+  image: eclipse-temurin:11
+
+jfrog-maven-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf gradle-config --repo-resolve $ARTIFACTORY_REMOTE_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO --use-wrapper
+
+    # Build Gradle project and publish artifacts to JFrog Artifactory
+    - jf gradle clean artifactoryPublish
+
+    # Publish build-info to JFrog Artifactory
+    - jf rt build-publish

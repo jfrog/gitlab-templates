@@ -1,0 +1,14 @@
+# Use this template to scan a Maven project for security vulnerabilities.
+# Requirements:
+# Configure the following variables with the corresponding Maven repositories in JFrog Artifactory:
+#   'ARTIFACTORY_VIRTUAL_RELEASE_REPO', 'ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO'.
+default:
+  image: maven:3.8.6-openjdk-11-slim
+
+jfrog-maven-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf mvn-config --repo-resolve-releases $ARTIFACTORY_VIRTUAL_RELEASE_REPO --repo-resolve-snapshots $ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO
+
+    # Audit Maven project
+    - jf audit

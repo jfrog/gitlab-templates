@@ -1,0 +1,13 @@
+# Use this template to scan a Gradle project for security vulnerabilities.
+# Requirements:
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding Gradle repository in JFrog Artifactory.
+default:
+  image: eclipse-temurin:11
+
+jfrog-maven-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf gradle-config --repo-resolve $ARTIFACTORY_REMOTE_REPO --use-wrapper
+
+    # Audit Gradle project
+    - jf audit

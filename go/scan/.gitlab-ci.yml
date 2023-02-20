@@ -1,0 +1,13 @@
+# Use this template to scan a Go project for security vulnerabilities.
+# Requirements:
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding Go repository in JFrog Artifactory.
+default:
+  image: golang
+
+jfrog-npm-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf go-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO
+
+    # Audit Go project
+    - jf audit

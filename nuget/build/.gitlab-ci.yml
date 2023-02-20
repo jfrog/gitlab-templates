@@ -1,0 +1,16 @@
+# Use this template to resolve artifacts in a NuGet project and publish the build information to JFrog Artifactory.
+# Requirements:
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding NuGet repository in JFrog Artifactory.
+default:
+  image: mono
+
+jfrog-nuget-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf nuget-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
+
+    # Resolve dependencies from JFrog Artifactory
+    - jf nuget restore
+
+    # Publish build-info to JFrog Artifactory
+    - jf rt build-publish
