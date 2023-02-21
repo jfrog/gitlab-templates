@@ -1,0 +1,17 @@
+# IDEs
+.idea
+.vscode
+*.iml
+
+# JFrog executable
+jf
+jf.exe
+jfrog
+jfrog.exe
+
+# Vim
+*~
+*.swp
+
+# IOS
+*.DS_Store
