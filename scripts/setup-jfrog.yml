@@ -35,10 +35,13 @@
     - export JFROG_CLI_ENV_EXCLUDE=${JFROG_CLI_ENV_EXCLUDE:'*password*;*secret*;*key*;*token*;*auth*;JF_URL;JF_USER;JF_PASSWORD;JF_ACCESS_TOKEN'}
 
     # Override registry variables:
-    - export CI_REGISTRY=$JF_DOCKER_REGISTRY
-    - export CI_REGISTRY_IMAGE="$JF_DOCKER_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME"
-    - export CI_REGISTRY_USER=$JF_USER
-    - export CI_REGISTRY_PASSWORD=${JF_ACCESS_TOKEN:=$JF_PASSWORD}
+    - |
+      if [ -n "${JF_DOCKER_REGISTRY}" ]; then
+        export CI_REGISTRY=$JF_DOCKER_REGISTRY
+        export CI_REGISTRY_IMAGE="$JF_DOCKER_REGISTRY/$CI_PROJECT_NAMESPACE/$CI_PROJECT_NAME"
+        export CI_REGISTRY_USER=$JF_USER
+        export CI_REGISTRY_PASSWORD=${JF_ACCESS_TOKEN:=$JF_PASSWORD}
+      fi
 
 .setup_jfrog_windows:
   script:
@@ -77,8 +80,10 @@
     - if (-not $env:JFROG_CLI_ENV_EXCLUDE) { $env:JFROG_CLI_ENV_EXCLUDE='password;secret;key;token;auth;JF_URL;JF_USER;JF_PASSWORD;JF_ACCESS_TOKEN' }
 
     # Override registry variables:
-    - $env:CI_REGISTRY=$env:JF_DOCKER_REGISTRY
-    - $env:CI_REGISTRY_IMAGE="$env:JF_DOCKER_REGISTRY/$env:CI_PROJECT_NAMESPACE/$env:CI_PROJECT_NAME"
-    - $env:CI_REGISTRY_USER=$env:JF_USER
-    - if ($env:JF_ACCESS_TOKEN) { $env:CI_REGISTRY_PASSWORD=$env:JF_ACCESS_TOKEN } elseif ($env:JF_PASSWORD) { $env:CI_REGISTRY_PASSWORD=$env:JF_PASSWORD }
-
+    - |
+      if ($env:JF_DOCKER_REGISTRY) {
+        $env:CI_REGISTRY=$env:JF_DOCKER_REGISTRY
+        $env:CI_REGISTRY_IMAGE="$env:JF_DOCKER_REGISTRY/$env:CI_PROJECT_NAMESPACE/$env:CI_PROJECT_NAME"
+        $env:CI_REGISTRY_USER=$env:JF_USER
+        if ($env:JF_ACCESS_TOKEN) { $env:CI_REGISTRY_PASSWORD=$env:JF_ACCESS_TOKEN } elseif ($env:JF_PASSWORD) { $env:CI_REGISTRY_PASSWORD=$env:JF_PASSWORD }
+      }
