@@ -5,8 +5,8 @@
 - [Overview](#overview)
 
 # Overview
-This repository holds example templates for Gitlab integration with the JFrog Platform, for multiple common build tools.
-The templates are based on the [Setup JFrog](scripts/README.md#Setup-JFrog-for-Gitlab-CI) script that can be simply included and referenced in a gitlab-ci.yml pipeline.
+This repository holds example templates for GitLab integration with the JFrog Platform, for multiple common build tools.
+The templates are based on the [Setup JFrog](scripts/README.md#Setup-JFrog-for-GitLab-CI) script that can be simply included and referenced in a gitlab-ci.yml pipeline.
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
