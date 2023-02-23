@@ -1,0 +1,13 @@
+# Use this template to scan a .NET project for security vulnerabilities.
+# Requirements:
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding NuGet repository in JFrog Artifactory.
+default:
+  image: mono
+
+jfrog-nuget-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf dotnet-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
+
+    # Audit .NET project
+    - jf audit

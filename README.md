@@ -9,6 +9,8 @@
   - [Limitations](#Limitations)
   - [Behind The Scenes](#Behind-The-Scenes)
 - [Templates](#Templates)
+  - [Build and Publish to JFrog Artifactory](#build-and-publish-to-jfrog-artifactory)
+  - [Security Scan for Vulnerabilities](#security-scan-for-vulnerabilities)
 - [Set Up a FREE JFrog Environment in the Cloud](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)
 
 # Overview
@@ -81,6 +83,21 @@ The actual setup scripts are maintained under the [jfrog-cli repository](https:/
 It includes two hidden jobs with scripts, which can be referenced after the file is included.
 
 ## Templates
+### Build and Publish to JFrog Artifactory
+* [.NET](build-dotnet-core/.gitlab-ci.yml)
+* [Go](build-go/.gitlab-ci.yml)
+* [Gradle](build-gradle/.gitlab-ci.yml)
+* [Maven](build-maven/.gitlab-ci.yml)
+* [npm](build-npm/.gitlab-ci.yml)
+* [NuGet](build-nuget/.gitlab-ci.yml)
+
+### Security Scan for Vulnerabilities
+* [.NET](audit-dotnet-core/.gitlab-ci.yml)
+* [Go](audit-go/.gitlab-ci.yml)
+* [Gradle](audit-gradle/.gitlab-ci.yml)
+* [Maven](audit-maven/.gitlab-ci.yml)
+* [npm](audit-npm/.gitlab-ci.yml)
+* [NuGet](audit-nuget/.gitlab-ci.yml)
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:

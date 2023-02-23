@@ -1,0 +1,17 @@
+# Use this template to build a Maven project, resolve artifacts, publish JARs, and publish the build information to JFrog Artifactory.
+# Requirements:
+# Configure the following variables with the corresponding Maven repositories in JFrog Artifactory:
+#   'ARTIFACTORY_VIRTUAL_RELEASE_REPO', 'ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO', 'ARTIFACTORY_LOCAL_RELEASE_REPO', and 'ARTIFACTORY_LOCAL_SNAPSHOT_REPO'.
+default:
+  image: maven:3.8.6-openjdk-11-slim
+
+jfrog-maven-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf mvn-config --repo-resolve-releases $ARTIFACTORY_VIRTUAL_RELEASE_REPO --repo-resolve-snapshots $ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO --repo-deploy-releases $ARTIFACTORY_LOCAL_RELEASE_REPO --repo-deploy-snapshots $ARTIFACTORY_LOCAL_SNAPSHOT_REPO
+
+    # Build Maven project and publish artifacts to JFrog Artifactory
+    - jf mvn package deploy
+
+    # Publish build-info to JFrog Artifactory
+    - jf rt build-publish

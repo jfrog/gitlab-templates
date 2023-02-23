@@ -1,0 +1,16 @@
+# Use this template to scan an npm project for security vulnerabilities.
+# Requirements:
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding npm repository in JFrog Artifactory.
+default:
+  image: node:16
+
+jfrog-npm-build:
+  script:
+    # Configure JFrog Artifactory repositories
+    - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO
+
+    # Resolve dependencies from JFrog Artifactory
+    - jf npm install
+
+    # Audit npm project
+    - jf audit
