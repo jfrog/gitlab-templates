@@ -1,10 +1,8 @@
-# JFrog GitLab Templates
-
-# Table of Contents
+# GitLab Templates for JFrog
 
 - [Overview](#Overview)
 - [Installation](#Installation)
-  - [Storing JFrog Platform Servers](#Storing-JFrog-Platform-Servers)
+  - [Setting the JFrog Platform Connection Details](#Setting-the-JFrog-Platform-Connection-Details)
   - [Additional Optional Variables](#Additional-Optional-Variables)
   - [Limitations](#Limitations)
   - [Behind The Scenes](#Behind-The-Scenes)
@@ -12,27 +10,31 @@
 - [Set Up a FREE JFrog Environment in the Cloud](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)
 
 # Overview
-This repository holds example templates for GitLab integration with the JFrog Platform, for multiple common build tools.
+This repository hosts templates for GitLab CI, for quick and easy integration with the JFrog Platform.
+The templates use the [.setup-jfrog.yml](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml) script. The script is included by each of the templates, and sets up the integration between the pipeline and the JFrog Platform.
 
-The templates are based on the Setup JFrog script that can be easily included and referenced in your GitLab pipeline.
-
-The Setup JFrog script downloads, installs and configures JFrog CLI, so that it can be used as part of your GitLab pipeline.
-
-In addition, the Setup includes the following features:
-* There's no need to add the build name and build number options and arguments to commands which accept them. All build related operations will be automatically recorded with the following default build name and build number.
-
-    * Build name: `$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_NAME`
-
-    * Build number: `$CI_PIPELINE_ID`
-
-
-* The script overrides the GitLab Container Registry (if used) with the configured Artifactory Docker Registry.
+The script does the following:
+* Installs [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI)
+* Configures JFrog CLI work with the JFrog Platform
+* Sets the build name and build number for JFrog CLI, with the values of `$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_NAME` and `$CI_PIPELINE_ID` respectively
+* Optionaly replaces the default Docker Registry with an Artifactory Docker Registry    
 
 ## Installation
-1. Set the connection details to the JFrog Platform as GitLab CI/CD Variables.
-   [Need a FREE JFrog environment in the cloud?](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)
-2. [Optional] Create a Docker repository in Artifactory, and add its URL as a GitLab CI/CD Variable.
-3. Include the Setup JFrog script in your GitLab pipeline:
+1. Ensure you have the connection details for the JFrog Platform. Don't have a JFrog Platform? [Set up a FREE instance in the cloud now](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)   
+2. [Set the JFrog Platform connection details](#Setting-the-JFrog-Platform-Connection-Details)
+3. Optionally set the URL of your Artifactory Docker Registry as the value of the **JF_DOCKER_REGISTRY** variable
+4. [Add the setup-jfrog script in your GitLab pipeline](#Adding-the-setup-jfrog-Script-in-Your-Pipeline)
+
+### Setting the JFrog Platform Connection Details
+Set the connection details to your JFrog Platform as [GitLab CI/CD variables](https://docs.gitlab.com/ee/ci/variables/) by using one of the following variables combinations:
+
+1. JF_URL - Annonymous access (no authentication) 
+2. JF_URL + JF_USER + JF_PASSWORD  - Basic authentication
+3. JF_URL + JF_ACCESS_TOKEN  - Authentication with JFrog Access Token. NOTE: If using the container registry, a username is also required when using this option.
+
+### Adding the setup-jfrog Script in Your Pipeline
+The templates included in this repository already have the setup-jfrog script included as follows.  
+
 ```yaml
 include:
   - remote: 'https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml'
@@ -43,7 +45,7 @@ include:
     file: '/script/.setup-jfrog.yml'
 ```
 
-Then, reference the setup script from any `script` or `before_script` sections in your GitLab pipeline:
+The script is then referenced from any `script` or `before_script` sections in the pipeline as follows:
 ```yaml
 job:
   script:
@@ -51,13 +53,6 @@ job:
     # OR for windows:
     - !reference [.setup_jfrog_windows, script]
 ```
-
-### Storing JFrog Platform Servers
-You can set the connection details to your JFrog Platform by using one of the following variables combinations:
-
-1. JF_URL (no authentication)
-2. JF_URL + JF_USER + JF_PASSWORD (basic authentication)
-3. JF_URL + JF_ACCESS_TOKEN (authentication using a JFrog Access Token. NOTE: If using the container registry, a username is also required when using this option)
 
 ### Additional Optional Variables
 Configurations can be done via Project Settings > CI/CD > Variables:
@@ -76,7 +71,7 @@ List of other optional environment variables can be found in the CLI official [d
     * Working against the Docker Registry without JFrog CLI.
     * Running separate jobs on temporary agents or docker containers.
 
-### Behind The Scenes
+### Behind the Scenes
 The actual setup scripts are maintained under the [jfrog-cli repository](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml). 
 It includes two hidden jobs with scripts, which can be referenced after the file is included.
 
