@@ -2,7 +2,14 @@
 
 # Table of Contents
 
-- [Overview](#overview)
+- [Overview](#Overview)
+- [Installation](#Installation)
+  - [Storing JFrog Platform Servers](#Storing-JFrog-Platform-Servers)
+  - [Additional Optional Variables](#Additional-Optional-Variables)
+  - [Limitations](#Limitations)
+  - [Behind The Scenes](#Behind-The-Scenes)
+- [Templates](#Templates)
+- [Set Up a FREE JFrog Environment in the Cloud](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)
 
 # Overview
 This repository holds example templates for GitLab integration with the JFrog Platform, for multiple common build tools.
@@ -69,9 +76,11 @@ List of other optional environment variables can be found in the CLI official [d
     * Working against the Docker Registry without JFrog CLI.
     * Running separate jobs on temporary agents or docker containers.
 
-### Behind the scenes
+### Behind The Scenes
 The actual setup scripts are maintained under the [jfrog-cli repository](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml). 
 It includes two hidden jobs with scripts, which can be referenced after the file is included.
+
+## Templates
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
