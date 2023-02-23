@@ -79,7 +79,7 @@ Need a FREE JFrog environment in the cloud to use with these templates? Just run
 1. Install JFrog CLI on your machine.
 2. Create a FREE JFrog environment in the cloud for you.
 
-**MacOS and Linux using cUrl**
+**MacOS and Linux using cURL**
 ```
 curl -fL "https://getcli.jfrog.io?setup" | sh
 ```
