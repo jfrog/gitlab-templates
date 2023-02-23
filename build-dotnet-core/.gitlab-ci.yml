@@ -1,6 +1,7 @@
 # Use this template to resolve artifacts in a .NET project and publish the build information to JFrog Artifactory.
 # Requirements:
-# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding NuGet repository in JFrog Artifactory.
+# Configure the following variables with the corresponding NuGet repositories in JFrog Artifactory:
+#   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 default:
   image: mono
 
@@ -11,6 +12,9 @@ jfrog-nuget-build:
 
     # Resolve dependencies from JFrog Artifactory
     - jf dotnet restore
+
+    # Upload artifact
+    - jf rt u <path-to-local-file> <ARTIFACTORY_LOCAL_REPO>/
 
     # Publish build-info to JFrog Artifactory
     - jf rt build-publish
