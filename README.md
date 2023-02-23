@@ -13,13 +13,14 @@
 
 # Overview
 This repository hosts templates for GitLab CI, for quick and easy integration with the JFrog Platform.
+
 The templates use the [.setup-jfrog.yml](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml) script. The script is included by each of the templates, and sets up the integration between the pipeline and the JFrog Platform.
 
 The script does the following:
 * Installs [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI)
-* Configures JFrog CLI work with the JFrog Platform
+* Configures JFrog CLI to work with the JFrog Platform
 * Sets the build name and build number for JFrog CLI, with the values of `$CI_PROJECT_PATH_SLUG-$CI_COMMIT_REF_NAME` and `$CI_PIPELINE_ID` respectively
-* Optionaly replaces the default Docker Registry with an Artifactory Docker Registry    
+* Optionally replaces the default Docker Registry with an Artifactory Docker Registry    
 
 ## Installation
 1. Ensure you have the connection details for the JFrog Platform. Don't have a JFrog Platform? [Set up a FREE instance in the cloud now](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)   
@@ -30,12 +31,12 @@ The script does the following:
 ### Setting the JFrog Platform Connection Details
 Set the connection details to your JFrog Platform as [GitLab CI/CD variables](https://docs.gitlab.com/ee/ci/variables/) by using one of the following variables combinations:
 
-1. JF_URL - Annonymous access (no authentication) 
+1. JF_URL - Anonymous access (no authentication) 
 2. JF_URL + JF_USER + JF_PASSWORD  - Basic authentication
-3. JF_URL + JF_ACCESS_TOKEN  - Authentication with JFrog Access Token. NOTE: If using the container registry, a username is also required when using this option.
+3. JF_URL + JF_ACCESS_TOKEN  - Authentication with JFrog Access Token. NOTE: When using the container registry, a username is also required when using this option.
 
 ### Adding the setup-jfrog Script in Your Pipeline
-The templates included in this repository already have the setup-jfrog script included as follows.  
+The templates included in this repository already have the setup-jfrog script included as follows:
 
 ```yaml
 include:
