@@ -1,5 +1,5 @@
 # GitLab Templates for JFrog
-
+[![JFrog CLI](images/readme-header.png)](#readme)
 - [Overview](#Overview)
 - [Installation](#Installation)
   - [Setting the JFrog Platform Connection Details](#Setting-the-JFrog-Platform-Connection-Details)
