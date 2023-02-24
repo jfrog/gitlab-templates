@@ -1,6 +1,11 @@
-# Use this template to resolve artifacts in a NuGet project and publish the build information to JFrog Artifactory.
+# This template does the following:
+#
+# 1. Builds the project while resolving the dependencies from Artifactory
+# 2. Uploads the build artifact to Artifactory
+# 3. Publishes the build-info to Artifactory
+#
 # Requirements:
-# Configure the following variables with the corresponding NuGet repositories in JFrog Artifactory:
+# Configure the following variables with the names of the  NuGet repositories in JFrog Artifactory:
 #   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 default:
   image: mono

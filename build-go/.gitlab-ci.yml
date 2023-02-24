@@ -1,7 +1,13 @@
-# Use this template to build a Go project, resolve artifacts, publish the Go package and publish the build information to JFrog Artifactory.
+# This template does the following:
+#
+# 1. Builds the project while resolving the dependencies from Artifactory
+# 2. Uploads the build artifact to Artifactory
+# 3. Publishes the build-info to Artifactory
+#
 # Requirements:
-# Configure the following variables with the corresponding Go repositories in JFrog Artifactory:
+# Configure the following variables with the names of Go repositories in JFrog Artifactory:
 #   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
+
 default:
   image: golang
 
@@ -13,7 +19,7 @@ jfrog-go-build:
     # Build Go project
     - jf go build
 
-    # Publish Go package to JFrog Artifactory
+    # Create and upload the Go package to JFrog Artifactory
     - jf go-publish v1.0.0
 
     # Publish build-info to JFrog Artifactory
