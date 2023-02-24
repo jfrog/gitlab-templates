@@ -1,5 +1,5 @@
 # GitLab Templates for JFrog
-<img src="images/readme-header.png" width="10%">
+<img src="images/readme-header.png" width="50%">
 - [Overview](#Overview)
 - [Installation](#Installation)
   - [Setting the JFrog Platform Connection Details](#Setting-the-JFrog-Platform-Connection-Details)
