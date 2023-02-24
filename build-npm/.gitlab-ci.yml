@@ -1,14 +1,14 @@
 # Use this template to install an npm project, resolve artifacts, publish *.tar.gz, and publish the build information to JFrog Artifactory.
 # Requirements:
 # Configure the following variables with the corresponding npm repositories in JFrog Artifactory:
-#   'ARTIFACTORY_REMOTE_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
+#   'ARTIFACTORY_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 default:
   image: node:16
 
 jfrog-npm-build:
   script:
     # Configure JFrog Artifactory repositories
-    - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
+    - jf npmc --repo-resolve $ARTIFACTORY_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
 
     # Resolve dependencies from JFrog Artifactory
     - jf npm install

@@ -8,7 +8,7 @@ default:
 jfrog-nuget-build:
   script:
     # Configure JFrog Artifactory repositories
-    - jf dotnet-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
+    - jf dotnet-config --repo-resolve $ARTIFACTORY_REPO
 
     # Resolve dependencies from JFrog Artifactory
     - jf dotnet restore

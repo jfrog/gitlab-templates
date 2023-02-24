@@ -1,13 +1,27 @@
-# Use this template to scan a NuGet project for security vulnerabilities.
+# Use this template to audit a .NET project for security vulnerabilities with JFrog Xray.
+# The `jf audit` command works as follows:
+#
+# 1. It creates a depedency tree for the project, including the direct and indirect (transitives) depedencies
+# 2. Scans the depedency tree with JFrog Xray
+# 3. Dispayes the vulnerabilities found
+#
+# To creates the depedency tree, the command expects the depedecies to be present on the local agent.
+# To ensure that, the `jf nuget restore` command is executed before the `jf audit` command.
+#
 # Requirements:
-# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding NuGet repository in JFrog Artifactory.
+# Configure 'ARTIFACTORY_REPO' variable with the NuGet repository in JFrog Artifactorym
+# from which the the depedencies can be resolved.
+
 default:
   image: mono
 
 jfrog-nuget-build:
   script:
     # Configure JFrog Artifactory repositories
-    - jf nuget-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
+    - jf nuget-config --repo-resolve $ARTIFACTORY_REPO
 
+    # Ensure the project depedencies are present locally
+    - jf nuget restore
+    -
     # Audit NuGet project
     - jf audit
