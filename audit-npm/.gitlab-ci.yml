@@ -29,3 +29,6 @@ jfrog-npm-audit:
 
     # Audit npm project
     - jf audit
+
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]

@@ -24,3 +24,6 @@ jfrog-maven-audit:
 
     # Audit Maven project
     - jf audit
+
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]

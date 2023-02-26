@@ -25,3 +25,6 @@ jfrog-gradle-build:
 
     # Publish build-info to JFrog Artifactory
     - jf rt build-publish
+
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]

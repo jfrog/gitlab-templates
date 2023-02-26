@@ -29,3 +29,6 @@ jfrog-nuget-audit:
 
     # Audit NuGet project
     - jf audit
+
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]

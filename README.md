@@ -73,6 +73,13 @@ job:
     - !reference [.setup_jfrog_windows, script]
 ```
 
+At the end of your `script`, or as part of `after_script`, you should add the cleanup reference:
+```yaml
+job:
+  after_script:
+    - !reference [.cleanup_jfrog, script]
+```
+
 ### Additional Optional Variables
 Configurations can be done via Project Settings > CI/CD > Variables:
 
