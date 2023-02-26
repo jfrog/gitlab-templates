@@ -11,7 +11,7 @@
 default:
   image: eclipse-temurin:11
 
-jfrog-maven-build:
+jfrog-gradle-build:
   script:
     # Configure JFrog Artifactory repositories
     - jf gradle-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO --use-wrapper

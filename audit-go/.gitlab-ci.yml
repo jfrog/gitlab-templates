@@ -12,7 +12,7 @@
 default:
   image: golang
 
-jfrog-npm-build:
+jfrog-npm-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf go-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO

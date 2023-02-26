@@ -9,16 +9,16 @@
 # To ensure that, the `jf nuget restore` command is executed before the `jf audit` command.
 #
 # Requirements:
-# Configure 'ARTIFACTORY_REPO' variable with the NuGet repository in JFrog Artifactory
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the NuGet repository in JFrog Artifactory
 # from which the dependencies can be resolved.
 
 default:
   image: mono
 
-jfrog-nuget-build:
+jfrog-nuget-audit:
   script:
     # Configure JFrog Artifactory repositories
-    - jf nuget-config --repo-resolve $ARTIFACTORY_REPO
+    - jf nuget-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
     # Ensure the project dependencies are presented locally
     - jf nuget restore

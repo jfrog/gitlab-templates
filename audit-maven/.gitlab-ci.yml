@@ -13,7 +13,7 @@
 default:
   image: maven:3.8.6-openjdk-11-slim
 
-jfrog-maven-build:
+jfrog-maven-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf mvn-config --repo-resolve-releases $ARTIFACTORY_VIRTUAL_RELEASE_REPO --repo-resolve-snapshots $ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO

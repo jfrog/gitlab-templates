@@ -8,16 +8,16 @@
 # To create the dependency tree, the command expects the dependencies to be presented on the local agent.
 #
 # Requirements:
-# Configure 'ARTIFACTORY_REPO' variable with the NuGet repository in JFrog Artifactory
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the Gradle repository in JFrog Artifactory
 # from which the dependencies can be resolved.
 
 default:
   image: eclipse-temurin:11
 
-jfrog-maven-build:
+jfrog-gradle-audit:
   script:
     # Configure JFrog Artifactory repositories
-    - jf gradle-config --repo-resolve $ARTIFACTORY_REPO --use-wrapper
+    - jf gradle-config --repo-resolve $ARTIFACTORY_REMOTE_REPO --use-wrapper
 
     # Audit Gradle project
     - jf audit

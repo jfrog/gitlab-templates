@@ -11,7 +11,7 @@
 default:
   image: mono
 
-jfrog-nuget-build:
+jfrog-dotnet-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf dotnet-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO

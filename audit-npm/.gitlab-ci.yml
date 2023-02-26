@@ -9,16 +9,16 @@
 # To ensure that, the `jf npm install` command is executed before the `jf audit` command.
 #
 # Requirements:
-# Configure 'ARTIFACTORY_REPO' variable with the npm repository in JFrog Artifactory
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the npm repository in JFrog Artifactory
 # from which the the dependencies can be resolved.
 
 default:
   image: node:16
 
-jfrog-npm-build:
+jfrog-npm-audit:
   script:
     # Configure JFrog Artifactory repositories
-    - jf npmc --repo-resolve $ARTIFACTORY_REPO
+    - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
     # Ensure the project dependencies are presented locally
     - jf npm install
