@@ -6,7 +6,7 @@
 #
 # Requirements:
 # Configure the following variables with the names of npm repositories in JFrog Artifactory:
-#   'ARTIFACTORY_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
+#   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 
 default:
   image: node:16
@@ -14,7 +14,7 @@ default:
 jfrog-npm-build:
   script:
     # Configure JFrog Artifactory repositories
-    - jf npmc --repo-resolve $ARTIFACTORY_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
+    - jf npmc --repo-resolve $ARTIFACTORY_VIRTUAL_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
 
     # Resolve dependencies from JFrog Artifactory
     - jf npm install

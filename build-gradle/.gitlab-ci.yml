@@ -6,7 +6,7 @@
 #
 # Requirements:
 # Configure the following variables with the names of Gradle repositories in JFrog Artifactory:
-#   'ARTIFACTORY_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
+#   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 
 default:
   image: eclipse-temurin:11
@@ -14,7 +14,7 @@ default:
 jfrog-maven-build:
   script:
     # Configure JFrog Artifactory repositories
-    - jf gradle-config --repo-resolve $ARTIFACTORY_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO --use-wrapper
+    - jf gradle-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO --use-wrapper
 
     # Build Gradle project and upload the artifacts to JFrog Artifactory
     - jf gradle clean artifactoryPublish
