@@ -14,8 +14,12 @@
 default:
   image: eclipse-temurin:11
 
+include:
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
 jfrog-gradle-audit:
   script:
+    - !reference [.setup_jfrog, script]
+
     # Configure JFrog Artifactory repositories
     - jf gradle-config --repo-resolve $ARTIFACTORY_REMOTE_REPO --use-wrapper
 

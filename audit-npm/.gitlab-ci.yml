@@ -15,8 +15,12 @@
 default:
   image: node:16
 
+include:
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
 jfrog-npm-audit:
   script:
+    - !reference [.setup_jfrog, script]
+
     # Configure JFrog Artifactory repositories
     - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
