@@ -11,8 +11,12 @@
 default:
   image: golang
 
+include:
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
 jfrog-go-build:
   script:
+    - !reference [.setup_jfrog, script]
+
     # Configure JFrog Artifactory repositories
     - jf go-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
 

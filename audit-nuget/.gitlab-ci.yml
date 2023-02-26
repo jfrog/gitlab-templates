@@ -15,8 +15,12 @@
 default:
   image: mono
 
+include:
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
 jfrog-nuget-audit:
   script:
+    - !reference [.setup_jfrog, script]
+
     # Configure JFrog Artifactory repositories
     - jf nuget-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
