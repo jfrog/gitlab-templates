@@ -1,10 +1,20 @@
-# Use this template to scan a Gradle project for security vulnerabilities.
+# Use this template to audit a Gradle project for security vulnerabilities with JFrog Xray.
+# The `jf audit` command works as follows:
+#
+# 1. It creates a dependency tree for the project, including the direct and indirect (transitives) dependencies
+# 2. Scans the dependency tree with JFrog Xray
+# 3. Displays the vulnerabilities found
+#
+# To create the dependency tree, the command expects the dependencies to be presented on the local agent.
+#
 # Requirements:
-# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding Gradle repository in JFrog Artifactory.
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the Gradle repository in JFrog Artifactory
+# from which the dependencies can be resolved.
+
 default:
   image: eclipse-temurin:11
 
-jfrog-maven-build:
+jfrog-gradle-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf gradle-config --repo-resolve $ARTIFACTORY_REMOTE_REPO --use-wrapper

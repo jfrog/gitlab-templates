@@ -1,11 +1,19 @@
-# Use this template to scan a Maven project for security vulnerabilities.
+# Use this template to audit a Maven project for security vulnerabilities with JFrog Xray.
+# The `jf audit` command works as follows:
+#
+# 1. It creates a dependency tree for the project, including the direct and indirect (transitives) dependencies
+# 2. Scans the dependency tree with JFrog Xray
+# 3. Displays the vulnerabilities found
+#
 # Requirements:
-# Configure the following variables with the corresponding Maven repositories in JFrog Artifactory:
-#   'ARTIFACTORY_VIRTUAL_RELEASE_REPO', 'ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO'.
+# Configure 'ARTIFACTORY_VIRTUAL_RELEASE_REPO' and `$ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO` variables
+# with the releases and snapshots Maven repositories in JFrog Artifactory
+# from which the dependencies can be resolved.
+
 default:
   image: maven:3.8.6-openjdk-11-slim
 
-jfrog-maven-build:
+jfrog-maven-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf mvn-config --repo-resolve-releases $ARTIFACTORY_VIRTUAL_RELEASE_REPO --repo-resolve-snapshots $ARTIFACTORY_VIRTUAL_SNAPSHOT_REPO

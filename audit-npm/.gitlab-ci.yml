@@ -1,15 +1,26 @@
-# Use this template to scan an npm project for security vulnerabilities.
+# Use this template to audit an npm project for security vulnerabilities with JFrog Xray.
+# The `jf audit` command works as follows:
+#
+# 1. It creates a dependency tree for the project, including the direct and indirect (transitives) dependencies
+# 2. Scans the dependency tree with JFrog Xray
+# 3. Displays the vulnerabilities found
+#
+# To create the dependency tree, the command expects the dependencies to be presented on the local agent.
+# To ensure that, the `jf npm install` command is executed before the `jf audit` command.
+#
 # Requirements:
-# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the corresponding npm repository in JFrog Artifactory.
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the npm repository in JFrog Artifactory
+# from which the the dependencies can be resolved.
+
 default:
   image: node:16
 
-jfrog-npm-build:
+jfrog-npm-audit:
   script:
     # Configure JFrog Artifactory repositories
     - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
-    # Resolve dependencies from JFrog Artifactory
+    # Ensure the project dependencies are presented locally
     - jf npm install
 
     # Audit npm project
