@@ -118,22 +118,31 @@ The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setu
 * [NuGet](build-nuget/.gitlab-ci.yml)
 
 ```
-$ jf rt u "./*audit*.yml" generic-local/
-14:17:55 [🔵Info] These files were uploaded:
+$ jf mvn clean install
+18:26:42 [🔵Info] Running Mvn...
+18:26:58 [🔵Info] These files were uploaded:
 
-📦 generic-local
-├── 📁 audit-dotnet-core
-│   └── 📄 .gitlab-ci.yml
-├── 📁 audit-gradle
-│   └── 📄 .gitlab-ci.yml
-├── 📁 audit-npm
-│   └── 📄 .gitlab-ci.yml
-├── 📁 audit-nuget
-│   └── 📄 .gitlab-ci.yml
-├── 📁 audit-maven
-│   └── 📄 .gitlab-ci.yml
-└── 📁 audit-go
-    └── 📄 .gitlab-ci.yml
+📦 libs-snapshot-local
+└── 📁 org
+    └── 📁 jfrog
+        └── 📁 test
+            ├── 📁 multi2
+            │   └── 📁 3.7-SNAPSHOT
+            │       ├── 📄 multi2-3.7-20230227.162644-67.jar
+            │       └── 📄 multi2-3.7-20230227.162644-67.pom
+            ├── 📁 multi1
+            │   └── 📁 3.7-SNAPSHOT
+            │       ├── 📄 multi1-3.7-20230227.162644-69.pom
+            │       ├── 📄 multi1-3.7-20230227.162644-69-tests.jar
+            │       ├── 📄 multi1-3.7-20230227.162644-69-sources.jar
+            │       └── 📄 multi1-3.7-20230227.162644-69.jar
+            ├── 📁 multi
+            │   └── 📁 3.7-SNAPSHOT
+            │       └── 📄 multi-3.7-20230227.162644-67.pom
+            └── 📁 multi3
+                └── 📁 3.7-SNAPSHOT
+                    ├── 📄 multi3-3.7-20230227.162644-67.pom
+                    └── 📄 multi3-3.7-20230227.162644-67.war
 ```
 
 ### Security Audit with JFrog Xray
