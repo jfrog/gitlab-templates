@@ -159,7 +159,7 @@ $ jf mvn clean install
 * [Pipenv](audit-pipenv/.gitlab-ci.yml)
 * [Yarn Berry](audit-yarn-berry/.gitlab-ci.yml)
 
-  <img src="images/audit.png">
+<img src="images/audit.png">
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
