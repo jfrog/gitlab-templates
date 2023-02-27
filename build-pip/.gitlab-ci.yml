@@ -5,26 +5,25 @@
 # 3. Publishes the build-info to Artifactory
 #
 # Requirements:
-# Configure the following variables with the names of Go repositories in JFrog Artifactory:
+# Configure the following variables with the names of the Pypi repositories in JFrog Artifactory:
 #   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
-
 default:
-  image: golang
+  image: python:bullseye
 
 include:
   - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
-jfrog-go-build:
+jfrog-pip-build:
   script:
     - !reference [.setup_jfrog, script]
 
     # Configure JFrog Artifactory repositories
-    - jf go-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO --repo-deploy $ARTIFACTORY_LOCAL_REPO
+    - jf pip-config --repo-resolve $ARTIFACTORY_VIRTUAL_REPO
 
-    # Build Go project
-    - jf go build
+    # Resolve dependencies from JFrog Artifactory
+    - jf pip install .
 
-    # Create and upload the Go package to JFrog Artifactory
-    - jf go-publish v1.0.0
+    # Upload artifact
+    - jf rt u <path-to-local-file> <ARTIFACTORY_LOCAL_REPO>
 
     # Publish build-info to JFrog Artifactory
     - jf rt build-publish

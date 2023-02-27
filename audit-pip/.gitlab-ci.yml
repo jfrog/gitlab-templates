@@ -1,4 +1,4 @@
-# Use this template to audit an npm project for security vulnerabilities with JFrog Xray.
+# Use this template to audit a Python project for security vulnerabilities with JFrog Xray.
 # The `jf audit` command works as follows:
 #
 # 1. It creates a dependency tree for the project, including the direct and indirect (transitives) dependencies
@@ -6,28 +6,27 @@
 # 3. Displays the vulnerabilities found
 #
 # To create the dependency tree, the command expects the dependencies to be presented on the local agent.
-# To ensure that, the `jf npm install` command is executed before the `jf audit` command.
 #
 # Requirements:
-# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the npm repository in JFrog Artifactory
-# from which the the dependencies can be resolved.
+# Configure 'ARTIFACTORY_REMOTE_REPO' variable with the Pypi repository in JFrog Artifactory
+# from which the dependencies can be resolved.
 
 default:
-  image: node:16
+  image: python:bullseye
 
 include:
   - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
-jfrog-npm-audit:
+jfrog-pip-audit:
   script:
     - !reference [.setup_jfrog, script]
 
-    # Configure JFrog Artifactory repositories
-    - jf npmc --repo-resolve $ARTIFACTORY_REMOTE_REPO
+    # Configure the Artifactory repository
+    - jf pip-config --repo-resolve $ARTIFACTORY_REMOTE_REPO
 
     # Ensure the project dependencies are presented locally
-    - jf npm install
+    - jf pip install .
 
-    # Audit npm project
+    # Audit .NET project
     - jf audit
 
   after_script:

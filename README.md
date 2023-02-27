@@ -109,6 +109,9 @@ The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setu
 * [Maven](build-maven/.gitlab-ci.yml)
 * [npm](build-npm/.gitlab-ci.yml)
 * [NuGet](build-nuget/.gitlab-ci.yml)
+* [Pip](build-pip/.gitlab-ci.yml)
+* [Pipenv](build-pipenv/.gitlab-ci.yml)
+* [Yarn Berry](build-yarn-berry/.gitlab-ci.yml)
 
 ### Security Audit with JFrog Xray
 * [.NET](audit-dotnet-core/.gitlab-ci.yml)
@@ -117,6 +120,9 @@ The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setu
 * [Maven](audit-maven/.gitlab-ci.yml)
 * [npm](audit-npm/.gitlab-ci.yml)
 * [NuGet](audit-nuget/.gitlab-ci.yml)
+* [Pip](audit-pip/.gitlab-ci.yml)
+* [Pipenv](audit-pipenv/.gitlab-ci.yml)
+* [Yarn Berry](audit-yarn-berry/.gitlab-ci.yml)
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
