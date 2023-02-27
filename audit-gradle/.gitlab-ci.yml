@@ -26,5 +26,6 @@ jfrog-gradle-audit:
     # Audit Gradle project
     - jf audit
 
+  after_script:
     # Cleanup
     - !reference [.cleanup_jfrog, script]

@@ -73,7 +73,7 @@ job:
     - !reference [.setup_jfrog_windows, script]
 ```
 
-At the end of your `script`, or as part of `after_script`, you should add the cleanup reference:
+At the end of your `script`, or as part of `after_script`, you should add the cleanup reference (same reference for all OS):
 ```yaml
 job:
   after_script:
