@@ -1,3 +1,5 @@
+[![GitLab Templates for JFrog](images/readme-header.png)](#readme)
+
 <div align="center">
 
 # GitLab Templates for JFrog
@@ -7,7 +9,9 @@
 - [Overview](#Overview)
 - [Installation](#Installation) 
   - [Storing the JFrog Platform Connection Details](#Storing-the-JFrog-Platform-Connection-Details)
+  - [Adding the setup-jfrog Script in Your Pipeline](#Adding-the-setup-jfrog-Script-in-Your-Pipeline)
   - [Additional Optional Variables](#Additional-Optional-Variables)
+  - [Prerequisites](#Prerequisites)
   - [Limitations](#Limitations)
   - [Behind The Scenes](#Behind-The-Scenes)
 - [Templates](#Templates)
@@ -91,6 +95,9 @@ Configurations can be done via Project Settings > CI/CD > Variables:
 
 See more environment variables in the JFrog CLI [documentation](https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory#CLIforJFrogArtifactory-EnvironmentVariables).
 
+### Prerequisites
+* For Linux / Mac: **cURL**
+
 ### Limitations
 1. If the `JF_DOCKER_REGISTRY` and `JF_ACCESS_TOKEN` variables are set, then the `JF_USER` variable is required.
 2. Build info collection is unavailable when:
@@ -113,6 +120,34 @@ The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setu
 * [Pipenv](build-pipenv/.gitlab-ci.yml)
 * [Yarn Berry](build-yarn-berry/.gitlab-ci.yml)
 
+```
+$ jf mvn clean install
+18:26:42 [🔵Info] Running Mvn...
+18:26:58 [🔵Info] These files were uploaded:
+
+📦 libs-snapshot-local
+└── 📁 org
+    └── 📁 jfrog
+        └── 📁 test
+            ├── 📁 multi2
+            │   └── 📁 3.7-SNAPSHOT
+            │       ├── 📄 multi2-3.7-20230227.162644-67.jar
+            │       └── 📄 multi2-3.7-20230227.162644-67.pom
+            ├── 📁 multi1
+            │   └── 📁 3.7-SNAPSHOT
+            │       ├── 📄 multi1-3.7-20230227.162644-69.pom
+            │       ├── 📄 multi1-3.7-20230227.162644-69-tests.jar
+            │       ├── 📄 multi1-3.7-20230227.162644-69-sources.jar
+            │       └── 📄 multi1-3.7-20230227.162644-69.jar
+            ├── 📁 multi
+            │   └── 📁 3.7-SNAPSHOT
+            │       └── 📄 multi-3.7-20230227.162644-67.pom
+            └── 📁 multi3
+                └── 📁 3.7-SNAPSHOT
+                    ├── 📄 multi3-3.7-20230227.162644-67.pom
+                    └── 📄 multi3-3.7-20230227.162644-67.war
+```
+
 ### Security Audit with JFrog Xray
 * [.NET](audit-dotnet-core/.gitlab-ci.yml)
 * [Go](audit-go/.gitlab-ci.yml)
@@ -123,6 +158,8 @@ The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setu
 * [Pip](audit-pip/.gitlab-ci.yml)
 * [Pipenv](audit-pipenv/.gitlab-ci.yml)
 * [Yarn Berry](audit-yarn-berry/.gitlab-ci.yml)
+
+  <img src="images/audit.png">
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
