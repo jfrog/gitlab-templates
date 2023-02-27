@@ -23,3 +23,7 @@ jfrog-npm-audit:
 
     # Audit Go project
     - jf audit
+
+  after_script:
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]

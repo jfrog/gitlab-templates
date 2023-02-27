@@ -28,3 +28,7 @@ jfrog-dotnet-audit:
 
     # Publish build-info to JFrog Artifactory
     - jf rt build-publish
+
+  after_script:
+    # Cleanup
+    - !reference [.cleanup_jfrog, script]
