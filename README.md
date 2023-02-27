@@ -11,6 +11,7 @@
   - [Storing the JFrog Platform Connection Details](#Storing-the-JFrog-Platform-Connection-Details)
   - [Adding the setup-jfrog Script in Your Pipeline](#Adding-the-setup-jfrog-Script-in-Your-Pipeline)
   - [Additional Optional Variables](#Additional-Optional-Variables)
+  - [Prerequisites](#Prerequisites)
   - [Limitations](#Limitations)
   - [Behind The Scenes](#Behind-The-Scenes)
 - [Templates](#Templates)
@@ -93,6 +94,9 @@ Configurations can be done via Project Settings > CI/CD > Variables:
 | JFROG_CLI_VERSION       | Use a specific JFrog CLI version instead of the latest version. The minimal version allowed is: 2.17.0                                                                                                           |
 
 See more environment variables in the JFrog CLI [documentation](https://www.jfrog.com/confluence/display/CLI/CLI+for+JFrog+Artifactory#CLIforJFrogArtifactory-EnvironmentVariables).
+
+### Prerequisites
+* For Linux / Mac: **cURL**
 
 ### Limitations
 1. If the `JF_DOCKER_REGISTRY` and `JF_ACCESS_TOKEN` variables are set, then the `JF_USER` variable is required.
