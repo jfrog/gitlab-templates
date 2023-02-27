@@ -5,7 +5,7 @@
 # 3. Publishes the build-info to Artifactory
 #
 # Requirements:
-# Configure the following variables with the names of the  NuGet repositories in JFrog Artifactory:
+# Configure the following variables with the names of the NuGet repositories in JFrog Artifactory:
 #   'ARTIFACTORY_VIRTUAL_REPO', and 'ARTIFACTORY_LOCAL_REPO'.
 default:
   image: mono
