@@ -140,7 +140,7 @@ $ jf rt u "./*audit*.yml" generic-local/
 * [npm](audit-npm/.gitlab-ci.yml)
 * [NuGet](audit-nuget/.gitlab-ci.yml)
 
-  <img src="images/audit.png" width="30%">
+  <img src="images/audit.png" width="50%">
 
 ## Set Up a FREE JFrog Environment in the Cloud
 Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
