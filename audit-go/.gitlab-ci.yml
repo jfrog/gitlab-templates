@@ -14,7 +14,7 @@ default:
 
 include:
   - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
-jfrog-npm-audit:
+jfrog-go-audit:
   script:
     - !reference [.setup_jfrog, script]
 
