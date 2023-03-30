@@ -22,7 +22,7 @@
 # Overview
 This repository includes pipeline templates for GitLab CI, for a quick and easy integration with the [JFrog Platform](https://jfrog.com/platform/).
 
-The templates use the [.setup-jfrog.yml](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml) pipeline script. The script is included by each of the templates, and sets up the integration between the pipeline and the JFrog Platform.
+The templates use the [.setup-jfrog.yml](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/v2/) pipeline scripts. The script is included by each of the templates, and sets up the integration between the pipeline and the JFrog Platform.
 
 The script does the following:
 * Installs [JFrog CLI](https://www.jfrog.com/confluence/display/CLI/JFrog+CLI)
@@ -48,36 +48,35 @@ Store the connection details of your JFrog Platform as [GitLab CI/CD variables](
 The templates included in this repository already have the **setup-jfrog** script included as follows:
 ```yaml
 include:
-  - remote: 'https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml'
+  - remote: 'https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-unix.yml'
 ```
 
-You also have the option of downloading the script from [releases.jfrog.io](https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml), add it in your project, and include it in your pipeline as follows:  
+For Windows agents, use:
 ```yaml
-  - local: '.setup-jfrog.yml'
+include:
+  - remote: 'https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-windows.yml'
+```
+
+You also have the option of downloading the matching script from [releases.jfrog.io](https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/), adding it to your project, and including it in your pipeline as follows:  
+```yaml
+  - local: '.setup-jfrog-unix.yml'
 ```
 
 You can also include it from one of your projects as follows:
 ```yaml
   - project: 'my-group/my-project'
-    file: '/script/.setup-jfrog.yml'
+    file: '/script/.setup-jfrog-unix.yml'
 ```
 
 #### Referencing the Script
-Once the script is included in your pipeline, you'll need to reference it from any `script` or `before_script` sections in the pipeline as shown below. If the pipeline is running on a Linux or MacOS agent, reference the script as follows:
+Once the script is included in your pipeline, you'll need to reference it from any `script` or `before_script` sections in the pipeline as shown below:
 ```yaml
 job:
   script:
     - !reference [.setup_jfrog, script]
 ```
 
-For Windows agents, use:
-```yaml
-job:
-  script:
-    - !reference [.setup_jfrog_windows, script]
-```
-
-At the end of your `script`, or as part of `after_script`, you should add the cleanup reference (same reference for all OS):
+At the end of your `script`, or as part of `after_script`, you should add the cleanup reference:
 ```yaml
 job:
   after_script:
@@ -105,8 +104,8 @@ See more environment variables in the JFrog CLI [documentation](https://www.jfro
     * Running separate jobs on temporary agents or docker containers.
 
 ### Behind the Scenes
-The **jfrog-setup** script is maintained in the [jfrog-cli repository](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/.setup-jfrog.yml). 
-The script includes two hidden jobs with scripts named `.setup_jfrog` and `.setup_jfrog_windows`, which can be referenced by the pipeline after the script is included.
+The **setup-jfrog** scripts are maintained in the [jfrog-cli repository](https://github.com/jfrog/jfrog-cli/blob/v2/build/gitlab/v2/). 
+Each yaml includes two hidden jobs with scripts named `.setup_jfrog` and `.cleanup_jfrog`, which can be referenced by the pipeline after the script is included.
 
 ## Templates
 ### Build and Upload to JFrog Artifactory

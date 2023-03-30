@@ -12,7 +12,10 @@ default:
   image: mono
 
 include:
-  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/.setup-jfrog.yml"
+  - remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-unix.yml"
+  # For Windows agents:
+  #- remote: "https://releases.jfrog.io/artifactory/jfrog-cli/gitlab/v2/.setup-jfrog-windows.yml"
+
 jfrog-dotnet-build:
   script:
     - !reference [.setup_jfrog, script]
