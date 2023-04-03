@@ -83,6 +83,14 @@ job:
     - !reference [.cleanup_jfrog, script]
 ```
 
+#### Downloading the setup-jfrog script and JFrog CLI from Artifactory
+If your GitLab environment is air-gapped, you would want your pipeline to avoid downloading the **setup-jfrog** script and also JFrog CLI from `https://releases.jfrog.io/artifactory`. Here's how you do this:
+
+As shown in the above [Including the Script](#including-the-Script) and [Referencing the Script](#Referencing-the-Script) sections, you have the option of copying the **setup-jfrog** script into your pipeline, and thus avoiding its download.
+Since the **setup-jfrog** script downloads JFrog CLI from `https://releases.jfrog.io/artifactory`, you should also configure the script to download JFrog CLI from a remote repository in your JFrog Artifactory instance. Here's how you do this:
+1. Create a remote generic repository in Artifactory pointing to `https://releases.jfrog.io/artifactory/`
+2. Add the **JF_RELEASES_REPO** variable to GitLab with the name of the repository you created
+
 ### Additional Optional Variables
 Configurations can be done via Project Settings > CI/CD > Variables:
 
