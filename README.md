@@ -17,7 +17,6 @@
 - [Templates](#Templates)
   - [Build and Upload to JFrog Artifactory](#build-and-upload-to-jfrog-artifactory)
   - [Security Audit with JFrog Xray](#security-audit-with-jfrog-xray)
-- [Set Up a FREE JFrog Environment in the Cloud](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud)
 
 # Overview
 This repository includes pipeline templates for GitLab CI, for a quick and easy integration with the [JFrog Platform](https://jfrog.com/platform/).
@@ -31,7 +30,7 @@ The script does the following:
 * Optionally replaces the default Docker Registry with an [Artifactory Docker Registry](https://www.jfrog.com/confluence/display/JFROG/Docker+Registry)    
 
 ## Installation
-1. Ensure you have the connection details for the JFrog Platform. Don't have a JFrog Platform? [Set up](#Set-Up-a-FREE-JFrog-Environment-in-the-Cloud) a free JFrog Platform instance in the cloud now
+1. Ensure you have the connection details for the JFrog Platform.
 2. [Store](#Storing-the-JFrog-Platform-Connection-Details) the JFrog Platform connection details on GitLab
 3. Optionally set the URL of your Artifactory Docker Registry as the value of the **JF_DOCKER_REGISTRY** variable
 4. [Add](#Adding-the-setup-jfrog-Script-in-Your-Pipeline) the **setup-jfrog** pipeline script in your GitLab pipeline
@@ -167,19 +166,3 @@ $ jf mvn clean install
 * [Yarn Berry](audit-yarn-berry/.gitlab-ci.yml)
 
 <img src="images/audit.png">
-
-## Set Up a FREE JFrog Environment in the Cloud
-Need a FREE JFrog environment in the cloud to use with these templates? Just run one of the following commands in your terminal. The commands will do the following:
-
-1. Install JFrog CLI on your machine.
-2. Create a FREE JFrog environment in the cloud for you.
-
-**MacOS and Linux using cURL**
-```
-curl -fL "https://getcli.jfrog.io?setup" | sh
-```
-
-**Windows using PowerShell**
-```
-powershell "Start-Process -Wait -Verb RunAs powershell '-NoProfile iwr https://releases.jfrog.io/artifactory/jfrog-cli/v2-jf/[RELEASE]/jfrog-cli-windows-amd64/jf.exe -OutFile $env:SYSTEMROOT\system32\jf.exe'" ; jf setup
-```
